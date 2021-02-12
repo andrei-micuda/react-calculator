@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap");
+
+:root {
+  font-size: 20px;
+}
+
+.App {
+  font-family: "Montserrat", sans-serif;
+  text-align: center;
+  font-weight: 300;
+}
+
+.input-tile {
+  transition: all 0.1s ease;
+}
