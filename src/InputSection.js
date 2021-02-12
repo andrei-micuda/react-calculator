@@ -1,91 +1,94 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, useMemo } from "react";
 import { SimpleGrid, Center } from "@chakra-ui/react";
 
 import { useAppContext } from "./Calculator";
 
 export default function InputSection({ style }) {
-  const inputButtons = [
-    {
-      displayValue: "C",
-      inputValue: "C"
-    },
-    {
-      displayValue: "±",
-      inputValue: "±"
-    },
-    {
-      displayValue: "%",
-      inputValue: "%"
-    },
-    {
-      displayValue: "÷",
-      inputValue: "/"
-    },
-    {
-      displayValue: "7",
-      inputValue: "7"
-    },
-    {
-      displayValue: "8",
-      inputValue: "8"
-    },
-    {
-      displayValue: "9",
-      inputValue: "9"
-    },
-    {
-      displayValue: "×",
-      inputValue: "*"
-    },
-    {
-      displayValue: "4",
-      inputValue: "4"
-    },
-    {
-      displayValue: "5",
-      inputValue: "5"
-    },
-    {
-      displayValue: "6",
-      inputValue: "6"
-    },
-    {
-      displayValue: "-",
-      inputValue: "-"
-    },
-    {
-      displayValue: "3",
-      inputValue: "3"
-    },
-    {
-      displayValue: "2",
-      inputValue: "2"
-    },
-    {
-      displayValue: "1",
-      inputValue: "1"
-    },
-    {
-      displayValue: "+",
-      inputValue: "+"
-    },
-    {
-      displayValue: "0",
-      inputValue: "0"
-    },
-    {
-      displayValue: ".",
-      inputValue: "."
-    },
-    {
-      displayValue: "🠐",
-      inputValue: "🠐"
-    },
-    {
-      displayValue: "=",
-      inputValue: "="
-    }
-  ];
+  const inputButtons = useMemo(
+    () => [
+      {
+        displayValue: "C",
+        inputValue: "C"
+      },
+      {
+        displayValue: "±",
+        inputValue: "±"
+      },
+      {
+        displayValue: "%",
+        inputValue: "%"
+      },
+      {
+        displayValue: "÷",
+        inputValue: "/"
+      },
+      {
+        displayValue: "7",
+        inputValue: "7"
+      },
+      {
+        displayValue: "8",
+        inputValue: "8"
+      },
+      {
+        displayValue: "9",
+        inputValue: "9"
+      },
+      {
+        displayValue: "×",
+        inputValue: "*"
+      },
+      {
+        displayValue: "4",
+        inputValue: "4"
+      },
+      {
+        displayValue: "5",
+        inputValue: "5"
+      },
+      {
+        displayValue: "6",
+        inputValue: "6"
+      },
+      {
+        displayValue: "-",
+        inputValue: "-"
+      },
+      {
+        displayValue: "3",
+        inputValue: "3"
+      },
+      {
+        displayValue: "2",
+        inputValue: "2"
+      },
+      {
+        displayValue: "1",
+        inputValue: "1"
+      },
+      {
+        displayValue: "+",
+        inputValue: "+"
+      },
+      {
+        displayValue: "0",
+        inputValue: "0"
+      },
+      {
+        displayValue: ".",
+        inputValue: "."
+      },
+      {
+        displayValue: "🠐",
+        inputValue: "🠐"
+      },
+      {
+        displayValue: "=",
+        inputValue: "="
+      }
+    ],
+    []
+  );
 
   const {
     currentCalculation,
@@ -93,10 +96,6 @@ export default function InputSection({ style }) {
     isResult,
     setIsResult
   } = useAppContext();
-
-  const handleKeyPress = useCallback((ev) => {
-    console.log(ev.key);
-  }, []);
 
   //* we will use the eval() function to compute the result
   const evaluateCalculation = (calc) => {
@@ -109,7 +108,6 @@ export default function InputSection({ style }) {
     });
 
     try {
-      console.log(calc);
       const res = eval(calc);
       return res.toString();
     } catch (err) {
@@ -117,47 +115,85 @@ export default function InputSection({ style }) {
     }
   };
 
-  const updateCalculation = (currentCalculation, pressedBtn) => {
-    switch (pressedBtn) {
-      case "C":
-        setCalculation("");
-        setIsResult(false);
-        break;
-
-      case "🠐":
-        if (isResult) {
+  const updateCalculation = useCallback(
+    (currentCalculation, pressedBtn) => {
+      switch (pressedBtn) {
+        case "C":
           setCalculation("");
           setIsResult(false);
-        } else {
-          setCalculation(
-            currentCalculation.slice(0, currentCalculation.length - 1)
-          );
-        }
-        break;
+          break;
 
-      case "±":
-        if (currentCalculation[0] !== "-") {
-          setCalculation("-".concat(currentCalculation));
-        } else {
-          setCalculation(currentCalculation.slice(1));
-        }
-        break;
+        case "🠐":
+          if (isResult) {
+            setCalculation("");
+            setIsResult(false);
+          } else {
+            setCalculation(
+              currentCalculation.slice(0, currentCalculation.length - 1)
+            );
+          }
+          break;
 
-      case "=":
-        setCalculation(evaluateCalculation(currentCalculation));
-        setIsResult(true);
-        break;
+        case "±":
+          if (currentCalculation[0] !== "-") {
+            setCalculation("-".concat(currentCalculation));
+          } else {
+            setCalculation(currentCalculation.slice(1));
+          }
+          break;
 
-      default:
-        if (isResult) {
-          setCalculation(pressedBtn);
-          setIsResult(false);
-        } else {
-          setCalculation(currentCalculation.concat(pressedBtn));
-        }
-        break;
-    }
-  };
+        case "=":
+          setCalculation(evaluateCalculation(currentCalculation));
+          setIsResult(true);
+          break;
+
+        default:
+          if (isResult) {
+            setCalculation(pressedBtn);
+            setIsResult(false);
+          } else {
+            setCalculation(currentCalculation.concat(pressedBtn));
+          }
+          break;
+      }
+    },
+    [isResult, setIsResult, setCalculation]
+  );
+
+  const handleKeyPress = useCallback(
+    (ev) => {
+      ev.preventDefault();
+      let key = ev.key;
+
+      switch (key) {
+        //* we want the same behaviour we have for = on Enter
+        case "Enter":
+          key = "=";
+          break;
+
+        //* we want the same behaviour we have for C on Esc
+        case "Escape":
+          key = "C";
+          break;
+
+        //* we want the same behaviour we have for 🠐 on Backspace
+        case "Backspace":
+          key = "🠐";
+          break;
+
+        default:
+          break;
+      }
+
+      //* we want Esc to act as C
+      const validInputs = inputButtons.map((btn) => btn.inputValue);
+      if (validInputs.includes(key)) {
+        updateCalculation(currentCalculation, key);
+      }
+      console.log(ev.key);
+    },
+    [inputButtons, currentCalculation, updateCalculation]
+  );
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyPress);
