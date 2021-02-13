@@ -190,7 +190,6 @@ export default function InputSection({ style }) {
       if (validInputs.includes(key)) {
         updateCalculation(currentCalculation, key);
       }
-      console.log(ev.key);
     },
     [inputButtons, currentCalculation, updateCalculation]
   );
@@ -254,6 +253,7 @@ export default function InputSection({ style }) {
         return (
           <Center
             className="input-tile"
+            color={style.fontColor}
             key={i}
             onClick={() =>
               updateCalculation(currentCalculation, btn.inputValue)

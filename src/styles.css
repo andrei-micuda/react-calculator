@@ -10,6 +10,10 @@
   font-weight: 300;
 }
 
+#outputSection {
+  cursor: default;
+}
+
 .input-tile {
   transition: all 0.1s ease;
 }

@@ -11,6 +11,7 @@ export const useAppContext = () => useContext(AppContext);
 export default function Calculator() {
   const [currentCalculation, setCalculation] = useState("");
   const [isResult, setIsResult] = useState(false);
+
   const styles = {
     outputStyles: {
       color: "#eee",
