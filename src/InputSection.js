@@ -94,11 +94,14 @@ export default function InputSection({ style }) {
     currentCalculation,
     setCalculation,
     isResult,
-    setIsResult
+    setIsResult,
+    history,
+    setHistory
   } = useAppContext();
 
   //* we will use the eval() function to compute the result
   const evaluateCalculation = (calc) => {
+    let historyElement = calc.replaceAll("*", "×").replaceAll("/", "÷");
     //* since in JS % is the modulus operator, we want to change any percentages in the string with values
     //* i.e. 20% => 0.2
     calc = calc.replaceAll(/[0-9]+%/g, (perc) => {
@@ -108,7 +111,20 @@ export default function InputSection({ style }) {
     });
 
     try {
-      const res = eval(calc);
+      let res = eval(calc);
+      res = Math.round((Number(res) + Number.EPSILON) * 100) / 100;
+
+      historyElement = `${historyElement}=${res}`;
+
+      //* if we've computed a result
+      //* if we have the maximum number of elements in the history array, we remove the last item and add a new one to the front
+      //* if we have less, we just add the new element to the array
+      if (history.length < 6) {
+        setHistory([...history, historyElement]);
+      } else {
+        const [, ...newHistory] = history;
+        setHistory([...newHistory, historyElement]);
+      }
       return res.toString();
     } catch (err) {
       return "Err.";

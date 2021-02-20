@@ -9,13 +9,12 @@ export default function OutputSection({ output, style }) {
 
   const renderOutput = (output) => {
     if (!isResult) return output.replaceAll("*", "×").replaceAll("/", "÷");
-    let res = Math.round((Number(output) + Number.EPSILON) * 100) / 100;
 
-    return isNaN(res) ? "Err." : res;
+    return isNaN(output) ? "Err." : output;
   };
 
   useEffect(() => {
-    textFit(document.getElementById("outputSection"), { maxFontSize: 64 });
+    textFit(document.getElementById("outputSection"), { maxFontSize: 48 });
   }, [output, isResult]);
 
   return (
@@ -24,10 +23,9 @@ export default function OutputSection({ output, style }) {
       id="outputSection"
       flexDirection="row-reverse"
       alignItems="flex-end"
-      h="35%"
+      h="25%"
       px="15px"
-      fontSize="64px"
-      borderTopRadius="2xl"
+      fontSize="48px"
     >
       {renderOutput(output)}
     </Flex>

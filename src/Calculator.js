@@ -1,8 +1,10 @@
 import React, { useState, useContext, createContext } from "react";
 import { Box } from "@chakra-ui/react";
 
+import OptionsMenu from "./OptionsMenu";
 import OutputSection from "./OutputSection";
 import InputSection from "./InputSection";
+import HistoryOverlay from "./HistoryOverlay";
 
 const AppContext = createContext();
 
@@ -11,6 +13,15 @@ export const useAppContext = () => useContext(AppContext);
 export default function Calculator() {
   const [currentCalculation, setCalculation] = useState("");
   const [isResult, setIsResult] = useState(false);
+  const [historyOverlayActive, setHistoryOverlayActive] = useState(false);
+  const [history, setHistory] = useState([]);
+
+  // "2+5=7",
+  // "17/3=21.2",
+  // "25/5+3=8",
+  // "17+3/2+4=9",
+  // "2+5=7",
+  // "17/3=21.2"
 
   const styles = {
     outputStyles: {
@@ -32,7 +43,16 @@ export default function Calculator() {
 
   return (
     <AppContext.Provider
-      value={{ currentCalculation, setCalculation, isResult, setIsResult }}
+      value={{
+        currentCalculation,
+        setCalculation,
+        isResult,
+        setIsResult,
+        historyOverlayActive,
+        setHistoryOverlayActive,
+        history,
+        setHistory
+      }}
     >
       <Box
         w="300px"
@@ -42,12 +62,14 @@ export default function Calculator() {
         cursor="pointer"
         userSelect="none"
       >
+        <OptionsMenu style={styles.outputStyles} />
         <OutputSection
           output={currentCalculation}
           style={styles.outputStyles}
         />
         <InputSection style={styles.inputStyles} />
       </Box>
+      <HistoryOverlay style={styles.outputStyles} />
     </AppContext.Provider>
   );
 }
