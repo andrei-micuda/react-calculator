@@ -5,7 +5,13 @@ import { IoTimeOutline, IoColorFillOutline } from "react-icons/io5";
 import { useAppContext } from "./Calculator";
 
 export default function OptionsMenu({ style }) {
-  const { historyOverlayActive, setHistoryOverlayActive } = useAppContext();
+  const {
+    historyOverlayActive,
+    setHistoryOverlayActive,
+    isOpen,
+    onOpen,
+    onClose
+  } = useAppContext();
 
   return (
     <Flex
@@ -19,6 +25,14 @@ export default function OptionsMenu({ style }) {
     >
       <IconButton
         aria-label="Change theme"
+        onClick={() => {
+          if (isOpen) {
+            onClose();
+          } else {
+            console.log("Open modal");
+            onOpen();
+          }
+        }}
         icon={<IoColorFillOutline m="auto" />}
         fontSize="25px"
         variant="unstyled"
@@ -26,8 +40,8 @@ export default function OptionsMenu({ style }) {
         zIndex="2"
       />
       <IconButton
-        onClick={() => setHistoryOverlayActive(!historyOverlayActive)}
         aria-label="History"
+        onClick={() => setHistoryOverlayActive(!historyOverlayActive)}
         icon={<IoTimeOutline m="auto" />}
         fontSize="25px"
         variant="unstyled"
