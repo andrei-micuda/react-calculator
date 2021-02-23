@@ -1,11 +1,14 @@
 import React, { useState, useContext, createContext } from "react";
-import { Box, Center, useDisclosure } from "@chakra-ui/react";
+import { Box, Center, useDisclosure, IconButton, Link } from "@chakra-ui/react";
+import { IoLogoGithub } from "react-icons/io5";
 
 import OptionsMenu from "./OptionsMenu";
 import OutputSection from "./OutputSection";
 import InputSection from "./InputSection";
 import HistoryOverlay from "./HistoryOverlay";
 import ThemeModal from "./ThemeModal";
+
+import themes from "./themes.json";
 
 const AppContext = createContext();
 
@@ -18,44 +21,6 @@ export default function Calculator() {
   const [historyOverlayActive, setHistoryOverlayActive] = useState(false);
   const [history, setHistory] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const themes = {
-    "theme-0": {
-      outputStyles: {
-        color: "#eee",
-        backgroundColor: "#333a4d"
-      },
-      inputStyles: {
-        fontColor: "#333a4d",
-        baseColor: "#eee",
-        hoverColor: "#ddd",
-        accentColor1: "#cdcdcd",
-        hoverColor1: "#bbb",
-        accentColor2: "#fda170",
-        hoverColor2: "#ED9768",
-        accentColor3: "#f88d6d",
-        hoverColor3: "#ED8768"
-      }
-    },
-    "theme-1": {
-      outputStyles: {
-        color: "#eee",
-        backgroundColor: "#333a4d"
-      },
-      inputStyles: {
-        fontColor: "#333a4d",
-        baseColor: "#eee",
-        hoverColor: "#ddd",
-        accentColor1: "#cdcdcd",
-        hoverColor1: "#bbb",
-        accentColor2: "#cae5f8",
-        hoverColor2: "#b6cedf",
-        accentColor3: "#9fd0f0",
-        hoverColor3: "#8fbbd8"
-      }
-    }
-  };
-  // #ebebeb
 
   return (
     <AppContext.Provider
@@ -78,6 +43,7 @@ export default function Calculator() {
         className="App"
         w="100vw"
         h="100vh"
+        flexDirection="column"
         bgGradient={`linear(to-r, ${themes[currentTheme].inputStyles.accentColor3}, ${themes[currentTheme].inputStyles.accentColor2})`}
       >
         <Box
@@ -97,6 +63,18 @@ export default function Calculator() {
         </Box>
         <HistoryOverlay style={themes[currentTheme].outputStyles} />
         <ThemeModal style={themes[currentTheme].outputStyles} themes={themes} />
+
+        <Link href="https://github.com/andrei-micuda" isExternal>
+          <IconButton
+            aria-label="Github link"
+            icon={<IoLogoGithub />}
+            color={themes[currentTheme].outputStyles.backgroundColor}
+            bg="transparent"
+            fontSize="44px"
+            mt="10px"
+            _hover={{ background: "transparent" }}
+          />
+        </Link>
       </Center>
     </AppContext.Provider>
   );

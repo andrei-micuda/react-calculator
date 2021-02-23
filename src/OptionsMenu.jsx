@@ -29,7 +29,6 @@ export default function OptionsMenu({ style }) {
           if (isOpen) {
             onClose();
           } else {
-            console.log("Open modal");
             onOpen();
           }
         }}

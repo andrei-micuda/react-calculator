@@ -79,8 +79,8 @@ export default function InputSection({ style }) {
         inputValue: "."
       },
       {
-        displayValue: "🠐",
-        inputValue: "🠐"
+        displayValue: "←",
+        inputValue: "←"
       },
       {
         displayValue: "=",
@@ -139,7 +139,7 @@ export default function InputSection({ style }) {
           setIsResult(false);
           break;
 
-        case "🠐":
+        case "←":
           if (isResult) {
             setCalculation("");
             setIsResult(false);
@@ -192,9 +192,9 @@ export default function InputSection({ style }) {
           key = "C";
           break;
 
-        //* we want the same behaviour we have for 🠐 on Backspace
+        //* we want the same behaviour we have for ← on Backspace
         case "Backspace":
-          key = "🠐";
+          key = "←";
           break;
 
         default:

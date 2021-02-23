@@ -1,0 +1,36 @@
+{
+  "theme-0": {
+    "outputStyles": {
+      "color": "#eee",
+      "backgroundColor": "#333a4d"
+    },
+    "inputStyles": {
+      "fontColor": "#333a4d",
+      "baseColor": "#eee",
+      "hoverColor": "#ddd",
+      "accentColor1": "#cdcdcd",
+      "hoverColor1": "#bbb",
+      "accentColor2": "#fda170",
+      "hoverColor2": "#ED9768",
+      "accentColor3": "#f88d6d",
+      "hoverColor3": "#ED8768"
+    }
+  },
+  "theme-1": {
+    "outputStyles": {
+      "color": "#eee",
+      "backgroundColor": "#333a4d"
+    },
+    "inputStyles": {
+      "fontColor": "#333a4d",
+      "baseColor": "#eee",
+      "hoverColor": "#ddd",
+      "accentColor1": "#cdcdcd",
+      "hoverColor1": "#bbb",
+      "accentColor2": "#cae5f8",
+      "hoverColor2": "#b6cedf",
+      "accentColor3": "#9fd0f0",
+      "hoverColor3": "#8fbbd8"
+    }
+  }
+}
