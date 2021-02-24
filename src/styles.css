@@ -20,6 +20,7 @@
 
 #historyOverlay {
   position: absolute;
+  margin-bottom: 60px;
   opacity: 0;
   transition: opacity 1s ease;
 }

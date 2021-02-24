@@ -32,5 +32,22 @@
       "accentColor3": "#9fd0f0",
       "hoverColor3": "#8fbbd8"
     }
+  },
+  "theme-2": {
+    "outputStyles": {
+      "color": "#FFF7EC",
+      "backgroundColor": "#273043"
+    },
+    "inputStyles": {
+      "fontColor": "#273043",
+      "baseColor": "#FFF7EC",
+      "hoverColor": "#e6ded4",
+      "accentColor1": "#EDD6D4",
+      "hoverColor1": "#d5c1bf",
+      "accentColor2": "#97D3C0",
+      "hoverColor2": "#88bead",
+      "accentColor3": "#7e9999",
+      "hoverColor3": "#718a8a"
+    }
   }
 }
