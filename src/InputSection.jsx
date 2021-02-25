@@ -55,16 +55,16 @@ export default function InputSection({ style }) {
         inputValue: "-"
       },
       {
-        displayValue: "3",
-        inputValue: "3"
+        displayValue: "1",
+        inputValue: "1"
       },
       {
         displayValue: "2",
         inputValue: "2"
       },
       {
-        displayValue: "1",
-        inputValue: "1"
+        displayValue: "3",
+        inputValue: "3"
       },
       {
         displayValue: "+",
