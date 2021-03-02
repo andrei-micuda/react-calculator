@@ -4,6 +4,8 @@
 
 &nbsp;
 
+[Live demo](https://react-calc-app.netlify.app/)
+
 Technologies used:
 * React
 * Chakra UI
